@@ -41,8 +41,6 @@ def home_page():
     to_map = st.button("Take me to Map!", icon = '➡️', width="stretch")
     if to_map:
         st.switch_page("pages/Map.py")
-    elif to_map and data_to != None and data_from != None:
-        st.switch_page("pages/Map.py")
     #Feedback Form
     st.space("xsmall")    
     feedback = st.button(":bar_chart: Looking to give feedback?", width = "stretch")
