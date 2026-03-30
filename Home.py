@@ -248,23 +248,30 @@ def weather_widget():
             user_latitude = user_location['coords']['latitude']
             user_longitude = user_location['coords']['longitude']    
         user_location_json = get_page_location()
-        return user_latitude, user_longitude
+        index = 1
+        time.sleep(3)
+        return user_latitude, user_longitude, index
 
     ##Call functions and assign the multitude of variables    
-    user_latitude, user_longitude = get_geocoords()
-    celcius, conditions, next_hour_celcius, next_hour_conditions, change_in_celcius, change_in_conditons, rise_or_drop, city = setup_weather(str(user_latitude), str(user_longitude))
-    trisk, crisk, temp_risk, cond_risk, next_hour_crisk  = risk_evaluation(celcius, conditions)
+    with st.spinner("Getting Geolocation..."):
+            user_latitude, user_longitude, index = get_geocoords()
+            st.toast("Found Geolocation!")
 
-    with st.container(border=True):
-        st.header("Displaying weather for " + str(city))
-        col1, col2 = st.columns(2)
-        with col1:
-            with st.container(border=True):
-                display_temp()
-        with col2:
-            with st.container(border=True):
-                display_cond()
 
+    while True:
+        if index == 1:
+            celcius, conditions, next_hour_celcius, next_hour_conditions, change_in_celcius, change_in_conditons, rise_or_drop, city = setup_weather(str(user_latitude), str(user_longitude))
+            trisk, crisk, temp_risk, cond_risk, next_hour_crisk  = risk_evaluation(celcius, conditions)
+            with st.container(border=True):
+                st.header("Displaying weather for " + str(city))
+                col1, col2 = st.columns(2)
+                with col1:
+                    with st.container(border=True):
+                        display_temp()
+                with col2:
+                    with st.container(border=True):
+                        display_cond()
+            break
 def home_page():
     
     st.set_page_config(initial_sidebar_state="expanded", page_title="Maccessible")
