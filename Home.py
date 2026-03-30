@@ -290,3 +290,4 @@ def home_page():
         give_feedback()
             
 home_page()
+weather_widget()
