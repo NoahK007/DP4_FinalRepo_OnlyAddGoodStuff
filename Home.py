@@ -238,7 +238,7 @@ def weather_widget():
             else:
                 st.success(cond_risk)
     ##Call functions and assign the multitude of variables    
-    celcius, conditions, next_hour_celcius, next_hour_conditions, change_in_celcius, change_in_conditons, rise_or_drop, city = setup_weather("45.089813", "-79.623157")
+    celcius, conditions, next_hour_celcius, next_hour_conditions, change_in_celcius, change_in_conditons, rise_or_drop, city = setup_weather(lat, long)
     trisk, crisk, temp_risk, cond_risk, next_hour_crisk  = risk_evaluation(celcius, conditions)
 
     with st.container(border=True):
@@ -303,6 +303,8 @@ if location and 'error' in location:
     else:
         st.warning(f"Geolocation error: {location['error']['message']}")
 elif location:
+    lat = location['coords']['latitude']
+    long = location['coords']['longitude']
     st.write(f"Latitude: {location['coords']['latitude']}")
     st.write(f"Longitude: {location['coords']['longitude']}")
 
