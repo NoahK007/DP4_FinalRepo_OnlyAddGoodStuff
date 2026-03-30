@@ -54,6 +54,7 @@ def backend_main():
     for i in range(len(places)):
         select.append(places[i]["name"])
     current_location = {"name": "current location", "long": user_latitude, "lat": user_longitude, "type": "centre"}
+    select.append(current_location)
     location = st.selectbox("Select your **current** location:", select)
     destination = st.selectbox("Select your **desired** destination:", select)
 
